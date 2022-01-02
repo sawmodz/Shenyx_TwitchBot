@@ -1,6 +1,7 @@
 const filesManagers = require('./utils/filesManagers')
 const tmi = require('tmi.js')
 const prefixCommande = require('./commands/prefix')
+const annonceRunnable = require('./runnable/annonceRunnable')
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -11,7 +12,11 @@ const client = new tmi.Client({
 	channels: filesManagers.getSettings("auth", "channel_to_connect")
 })
 
-client.connect()
+client.connect().then(()=>{
+    filesManagers.getSettings("auth", "channel_to_connect").forEach(channel => {
+        setInterval(()=>annonceRunnable(client, "#"+channel), filesManagers.getSettings("settings", "annonce_timer") * 1000 * 60)
+    })
+})
 
 client.on("message", (channel, tags, message, self) => {
     if(self) return
