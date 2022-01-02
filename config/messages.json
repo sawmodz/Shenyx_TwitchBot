@@ -32,5 +32,8 @@
     "ok_removeDomain":"le domaine %domain% a bien été supprimé",
 
     "uptime_offline":"la chaine %channel% est hors ligne", 
-    "uptime_online":"Le stream tourne depuis %time%"
+    "uptime_online":"Le stream tourne depuis %time%",
+
+    "level_message":"Tu est actuellement niveau %lvl% (%xp%/%maxXp%)",
+    "level_up":"%username% vien de passer niveau %level%"
 }

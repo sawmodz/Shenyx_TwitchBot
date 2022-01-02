@@ -9,6 +9,11 @@ const changeCommands = require('./commands/changeCommands')
 const adddomain = require('./commands/addDomain')
 const removeDomain = require('./commands/removeDomain')
 const uptime = require('./commands/uptime')
+const level = require('./commands/level')
+const { addXp } = require('./utils/userManagers')
+const levelRunnable = require('./runnable/levelRunnable')
+
+let actifUser = {}
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -22,6 +27,7 @@ const client = new tmi.Client({
 client.connect().then(()=>{
     filesManagers.getSettings("auth", "channel_to_connect").forEach(channel => {
         setInterval(()=>annonceRunnable(client, "#"+channel), filesManagers.getSettings("settings", "annonce_timer") * 1000 * 60)
+        setInterval(() => actifUser = levelRunnable(client, channel, actifUser), filesManagers.getSettings("settings", "reward_timer") * 1000 * 60);
     })
 })
 
@@ -67,6 +73,12 @@ client.on("message", (channel, tags, message, self) => {
 
     let prefix = filesManagers.getSettings("settings", "prefix")
 
+    if(actifUser[tags.username] != undefined){
+        delete actifUser[tags.username]
+    }
+
+    actifUser[tags.username] = Date.now()
+
     switch (message.toLowerCase().split(" ")[0]) {
         case prefix+"prefix" :
             prefixCommande(channel, tags, message, client)
@@ -92,6 +104,12 @@ client.on("message", (channel, tags, message, self) => {
         case prefix+"uptime":
             uptime(channel, tags, message, client)
             return;
+        case prefix+"lvl":
+            level(channel, tags, message, client)
+            return;
+        case prefix+"level":
+            level(channel, tags, message, client)
+            return;
     }
 
     if(message.startsWith(prefix)){
@@ -102,6 +120,7 @@ client.on("message", (channel, tags, message, self) => {
     }
 
     checkAcceptedLink(message, channel, tags)
+    addXp(tags.username, 10, client, channel)
 })
 
 client.on("subscription", (channel, username, method, message, userstate) => {

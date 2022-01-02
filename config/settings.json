@@ -1,4 +1,6 @@
 {
     "prefix":"!",
-    "annonce_timer":5
+    "annonce_timer":5,
+    "afk_timer":5,
+    "reward_timer":5
 }
