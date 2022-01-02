@@ -29,5 +29,8 @@
 
     "error_on_removeDomain":"%prefix%removedomain <domaine>",
     "already_exist_removeDomain":"le domaine %domain% n'est pas dans la whitelist",
-    "ok_removeDomain":"le domaine %domain% a bien été supprimé"
+    "ok_removeDomain":"le domaine %domain% a bien été supprimé",
+
+    "uptime_offline":"la chaine %channel% est hors ligne", 
+    "uptime_online":"Le stream tourne depuis %time%"
 }

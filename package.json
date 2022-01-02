@@ -9,6 +9,7 @@
   "author": "Theo Wincke",
   "license": "ISC",
   "dependencies": {
+    "request": "^2.88.2",
     "tmi.js": "^1.8.3"
   }
 }

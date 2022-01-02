@@ -8,6 +8,7 @@ const removeCommands = require('./commands/removeCommands')
 const changeCommands = require('./commands/changeCommands')
 const adddomain = require('./commands/addDomain')
 const removeDomain = require('./commands/removeDomain')
+const uptime = require('./commands/uptime')
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -87,6 +88,9 @@ client.on("message", (channel, tags, message, self) => {
             return;
         case prefix+"removedomain":
             removeDomain(channel, tags, message, client, prefix)
+            return;
+        case prefix+"uptime":
+            uptime(channel, tags, message, client)
             return;
     }
 
