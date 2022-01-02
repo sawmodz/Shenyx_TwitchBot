@@ -16,7 +16,7 @@ Go on your laptop and install Node https://nodejs.org/en/
 open terminal on folder where project is
 ```bash
 $ git clone https://github.com/sawmodz/Shenyx_TwitchBot
-$ cd basicTMIProject
+$ cd Shenyx_TwitchBot
 $ npm i
 $ node ./index.js
 ```
