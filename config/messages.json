@@ -1,3 +1,10 @@
 {
-    "prefix_change":"Prefix change to : %prefix%"
+    "prefix_change":"Prefix change to : %prefix%",
+
+    "sub_message":"%username% vient de s'abonné a la chaine",
+    "continue_anonyme_subgift":"%username% vient de continuer son abonnement donné par une personne anonyme",
+    "continue_subgift":"%username% vient de continuer son abonnement donné par %sender%",
+    "resub":"%username% s'est reabonné pour la %months% fois",
+    "subgift":"%username% vient d'offrir un abonnement a %recipient%",
+    "subgift_mystery":"%username% vient d'offrir %numbOfSubs% sub"
 }
