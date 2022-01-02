@@ -2,6 +2,7 @@ const filesManagers = require('./utils/filesManagers')
 const tmi = require('tmi.js')
 const prefixCommande = require('./commands/prefix')
 const annonceRunnable = require('./runnable/annonceRunnable')
+const random = require('./commands/random')
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -26,6 +27,9 @@ client.on("message", (channel, tags, message, self) => {
     switch (message.toLowerCase().split(" ")[0]) {
         case prefix+"prefix" :
             prefixCommande(channel, tags, message, client)
+            return;
+        case prefix+"random" :
+            random(channel, tags, message, client, prefix)
             return;
     }
 })

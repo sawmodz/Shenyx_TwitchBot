@@ -6,5 +6,8 @@
     "continue_subgift":"%username% vient de continuer son abonnement donné par %sender%",
     "resub":"%username% s'est reabonné pour la %months% fois",
     "subgift":"%username% vient d'offrir un abonnement a %recipient%",
-    "subgift_mystery":"%username% vient d'offrir %numbOfSubs% sub"
+    "subgift_mystery":"%username% vient d'offrir %numbOfSubs% sub",
+
+    "show_random_number":"Le nom aleatoire que tu as tirée est le %number%",
+    "error_on_number":"%prefix%random <min> <max>"
 }
