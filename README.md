@@ -1,7 +1,7 @@
 # Shenyx's Project
 ## How to config
  1. Go to **config/auth.json**
- 2. change on **password** the **changeME**  to oauthToken (you can have this on [twitchtokengenerator](https://twitchtokengenerator.com) and get acces token)
+ 2. change on **password** the **changeME**  to oauthToken (you can have this on [twitchapps](https://twitchapps.com/tmi/) and get acces token)
  3. change on **bot_name** the **changeME** to the name of account of bot
  4. change on **channel_to_connect** the **changeME** to the name of twitch channel where the bot must be connect
 

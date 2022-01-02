@@ -6,6 +6,8 @@ const random = require('./commands/random')
 const addCommands = require('./commands/addCommands')
 const removeCommands = require('./commands/removeCommands')
 const changeCommands = require('./commands/changeCommands')
+const adddomain = require('./commands/addDomain')
+const removeDomain = require('./commands/removeDomain')
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -21,6 +23,43 @@ client.connect().then(()=>{
         setInterval(()=>annonceRunnable(client, "#"+channel), filesManagers.getSettings("settings", "annonce_timer") * 1000 * 60)
     })
 })
+
+function validURL(str) {
+    const pattern = new RegExp('^(https?:\\/\\/)?'+
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+
+      '(\\#[-a-z\\d_]*)?$','i');
+    return !!pattern.test(str);
+}
+
+const checkAcceptedLink = (message, channel, tags) => {
+    const isURL = validURL(message)
+    if(isURL){
+        const regex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/igm;
+        let m;
+        let mylastdomain;
+        while ((m = regex.exec(message)) !== null) {
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+            m.forEach((match, groupIndex) => {
+                mylastdomain = match
+            })
+        }
+        
+        whitelistDomain = filesManagers.getSettings("whitelistDomain", "whitelistDomains")
+
+        if(!whitelistDomain.includes(mylastdomain)){
+            if(tags.mod || tags.badges != null && tags.badges["broadcaster"] == "1"){
+                return;   
+            }else{
+                client.deletemessage(channel, tags.id)
+            }
+        }
+    }
+}
 
 client.on("message", (channel, tags, message, self) => {
     if(self) return
@@ -43,13 +82,22 @@ client.on("message", (channel, tags, message, self) => {
         case prefix+"changecommand":
             changeCommands(channel, tags, message, client, prefix)
             return;
+        case prefix+"adddomain":
+            adddomain(channel, tags, message, client, prefix)
+            return;
+        case prefix+"removedomain":
+            removeDomain(channel, tags, message, client, prefix)
+            return;
     }
 
     if(message.startsWith(prefix)){
         if(filesManagers.getSettings("customCommands", message.toLowerCase().split(" ")[0]) != undefined){
             client.say(channel, filesManagers.getSettings("customCommands", message.toLowerCase().split(" ")[0]))
+            return;
         }
     }
+
+    checkAcceptedLink(message, channel, tags)
 })
 
 client.on("subscription", (channel, username, method, message, userstate) => {

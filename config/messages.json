@@ -21,5 +21,13 @@
 
     "error_on_changeCommand":"%prefix%changecommand <command> <text>",
     "already_exist_changeCommand":"la commande %command% n'existe pas",
-    "ok_changeCommand":"La commande %command% a bien été modifié"
+    "ok_changeCommand":"La commande %command% a bien été modifié",
+
+    "error_on_addDomain":"%prefix%adddomain <domaine>",
+    "already_exist_addDomain":"le domaine %domain% est deja dans la whitelist",
+    "ok_addDomain":"le domaine %domain% a bien été ajouté",
+
+    "error_on_removeDomain":"%prefix%removedomain <domaine>",
+    "already_exist_removeDomain":"le domaine %domain% n'est pas dans la whitelist",
+    "ok_removeDomain":"le domaine %domain% a bien été supprimé"
 }
