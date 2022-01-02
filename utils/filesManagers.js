@@ -9,6 +9,18 @@ const pathExist = (path) => {
     return fs.existsSync(path)
 }
 
+const removeData = (file, key) => {
+    try {
+        let data = readData(file)
+
+        delete data[key]
+
+        fs.writeFileSync(PATH+file+".json", JSON.stringify(data))
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const setData = (file, key, value) => {
     try {
         let data = readData(file)
@@ -31,4 +43,4 @@ const readData = (file) => {
     return data
 }
 
-module.exports = {getSettings, setData}
+module.exports = {getSettings, setData, removeData}

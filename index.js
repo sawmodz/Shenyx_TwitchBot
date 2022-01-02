@@ -3,6 +3,9 @@ const tmi = require('tmi.js')
 const prefixCommande = require('./commands/prefix')
 const annonceRunnable = require('./runnable/annonceRunnable')
 const random = require('./commands/random')
+const addCommands = require('./commands/addCommands')
+const removeCommands = require('./commands/removeCommands')
+const changeCommands = require('./commands/changeCommands')
 
 const client = new tmi.Client({
 	options: { debug: true },
@@ -31,6 +34,21 @@ client.on("message", (channel, tags, message, self) => {
         case prefix+"random" :
             random(channel, tags, message, client, prefix)
             return;
+        case prefix+"addcommand":
+            addCommands(channel, tags, message, client, prefix)
+            return;
+        case prefix+"removecommand":
+            removeCommands(channel, tags, message, client, prefix)
+            return;
+        case prefix+"changecommand":
+            changeCommands(channel, tags, message, client, prefix)
+            return;
+    }
+
+    if(message.startsWith(prefix)){
+        if(filesManagers.getSettings("customCommands", message.toLowerCase().split(" ")[0]) != undefined){
+            client.say(channel, filesManagers.getSettings("customCommands", message.toLowerCase().split(" ")[0]))
+        }
     }
 })
 

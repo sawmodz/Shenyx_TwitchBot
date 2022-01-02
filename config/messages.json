@@ -9,5 +9,17 @@
     "subgift_mystery":"%username% vient d'offrir %numbOfSubs% sub",
 
     "show_random_number":"Le nom aleatoire que tu as tirée est le %number%",
-    "error_on_number":"%prefix%random <min> <max>"
+    "error_on_number":"%prefix%random <min> <max>",
+
+    "error_on_addCommand":"%prefix%addcommand <command> <text>",
+    "already_exist_addCommand":"la commande %command% existe deja",
+    "ok_addCommand":"La commande %command% a bien été ajouté",
+
+    "error_on_removeCommand":"%prefix%removecommand <command>",
+    "already_exist_removeCommand":"la commande %command% n'existe pas",
+    "ok_removeCommand":"La commande %command% a bien été supprimé",
+
+    "error_on_changeCommand":"%prefix%changecommand <command> <text>",
+    "already_exist_changeCommand":"la commande %command% n'existe pas",
+    "ok_changeCommand":"La commande %command% a bien été modifié"
 }
